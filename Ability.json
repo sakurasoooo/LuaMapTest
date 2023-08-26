@@ -1,0 +1,47 @@
+{
+    "abilities": {
+        "Delayed Blast Fireball": {
+            "effect": "Delayed Blast Fireball Launch",
+            "stats": {
+                "prepTime": 0.3,
+                "period": 4,
+                "range": 300
+            },
+            "cost": {
+                "mana": 0
+            },
+            "targetFilter": {
+                "player": 0
+            }
+        },
+        "Ice Spike": {
+            "castType": 2,
+            "effect": "Ice Spike Delay Search",
+            "stats": {
+                "prepTime": 0.5,
+                "finishTime": 1,
+                "period": 10,
+                "useInitialCooldown": true,
+                "range": 10
+            },
+            "cost": {
+                "health": 0,
+                "mana": 0
+            },
+            "targetFilter": {
+                "player": 0,
+                "ally": 2,
+                "enemy": 2,
+                "neutral": 0,
+                "unit": 1,
+                "missile": 0,
+                "structure": 0,
+                "air": 0,
+                "ground": 0,
+                "stealth": 0,
+                "invulerable": 0,
+                "alive": 0
+            }
+        }
+    }
+}

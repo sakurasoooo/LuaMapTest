@@ -1,0 +1,7 @@
+<UI xmlns:bind="https://platform.wildsky.dev/xml/ui/bind">
+    <Frame height="200" width="200" rightAlignmentInParent="true" layout="flex" name="Root">
+        <Button id="upgrade_button" width="200" height="100" rightAlignmentInParent="true">
+            <Text text="Upgrade Enemies" />
+        </Button>
+    </Frame>
+</UI>

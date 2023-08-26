@@ -1,0 +1,90 @@
+{
+    "units": {
+        "Delayed Blast Fireball Missile": {
+            "baseUnit": "_CMissile",
+            "components": {
+                "unit": {
+                    "unitType": 1
+                },
+                "unitStats": {
+                    "radius": 0,
+                    "selectable": false
+                },
+                "health": {
+                    "maxHealth": 999
+                },
+                "behavior": {
+                    "doNothing": {}
+                }
+            },
+            "displayName": "data/GameData/unit/_CMissile/display_name"
+        },
+        "Hero FireMage": {
+            "baseUnit": "_CUnit",
+            "components": {
+                "health": {
+                    "maxHealth": 500
+                },
+                "mana": {
+                    "maxMana": 100
+                },
+                "shield": {
+                    "regeneration": 3
+                },
+                "behavior": {
+                    "genericControllableUnit": {
+                        "leashRadius": 30
+                    }
+                }
+            },
+            "references": {
+                "abilityList": [
+                    "Delayed Blast Fireball"
+                ]
+            },
+            "level": 0,
+            "bindAbilityUi": false,
+            "healthBar": {
+                "type": 7,
+                "showWhenFull": false
+            }
+        },
+        "Hero IceMage": {
+            "baseUnit": "_CUnit",
+            "components": {
+                "health": {
+                    "maxHealth": 100
+                },
+                "mana": {
+                    "maxMana": 100,
+                    "regeneration": 10
+                },
+                "movement": {
+                    "moveSpeed": 1
+                },
+                "behavior": {
+                    "genericControllableUnit": {
+                        "leashRadius": 30
+                    }
+                }
+            },
+            "references": {
+                "weaponList": [
+                    "Hero IceMage Weapon"
+                ],
+                "abilityList": [
+                    "Ice Spike"
+                ]
+            },
+            "level": 0,
+            "bindAbilityUi": false,
+            "healthBar": {
+                "type": 7,
+                "showWhenFull": false
+            }
+        },
+        "Hero IceMage Weapon Missile": {
+            "baseUnit": "_CMissile"
+        }
+    }
+}

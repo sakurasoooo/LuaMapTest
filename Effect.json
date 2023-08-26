@@ -1,0 +1,100 @@
+{
+    "effects": {
+        "Delayed Blast Firebal Search": {
+            "areaSearch": {
+                "debugDraw": true,
+                "areaSearchType": {
+                    "circle": {
+                        "radius": 3
+                    }
+                },
+                "filter": {
+                    "player": 2
+                },
+                "effect": "Delayed Blast Fireball Damage"
+            }
+        },
+        "Delayed Blast Fireball Damage": {
+            "damage": {
+                "damageAmount": 100
+            }
+        },
+        "Delayed Blast Fireball Delay": {
+            "persistent": {
+                "periodicCount": 1,
+                "finalEffect": "Delayed Blast Firebal Search",
+                "periodicDurations": [
+                    2
+                ]
+            }
+        },
+        "Delayed Blast Fireball Launch": {
+            "launchMissile": {
+                "targetType": 2,
+                "missileUnit": "Delayed Blast Fireball Missile",
+                "effect": "Delayed Blast Fireball Delay",
+                "mover": "Delayed Blast Fireball Missile"
+            }
+        },
+        "Hero IceMage Weapon Damage": {
+            "damage": {
+                "damageAmount": 5
+            }
+        },
+        "Hero IceMage Weapon Launch": {
+            "launchMissile": {
+                "missileUnit": "Hero IceMage Weapon Missile",
+                "effect": "Hero IceMage Weapon Damage",
+                "mover": "Hero IceMage Weapon Missile"
+            }
+        },
+        "Ice Spike Damage": {
+            "damage": {
+                "damageAmount": 50
+            }
+        },
+        "Ice Spike Delay": {
+            "persistent": {
+                "periodicCount": 1,
+                "finalEffect": "Ice Spike Search",
+                "location": 2,
+                "startEffectOffset": {
+                    "explicitOffset": {
+                        "forward": 1,
+                        "right": 1
+                    }
+                },
+                "periodicDurations": [
+                    1.5
+                ]
+            }
+        },
+        "Ice Spike Delay Search": {
+            "parent": "_StandardAreaSearch",
+            "areaSearch": {
+                "areaSearchType": {
+                    "circle": {
+                        "radius": 5
+                    }
+                },
+                "effect": "Ice Spike Delay"
+            }
+        },
+        "Ice Spike Search": {
+            "areaSearch": {
+                "debugDraw": true,
+                "areaSearchType": {
+                    "circle": {
+                        "radius": 1
+                    }
+                },
+                "filter": {
+                    "player": 2,
+                    "ally": 2,
+                    "enemy": 0
+                },
+                "effect": "Ice Spike Damage"
+            }
+        }
+    }
+}

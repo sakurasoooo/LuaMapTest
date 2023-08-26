@@ -1,0 +1,17 @@
+{
+    "behaviors": {
+        "Damage and MaxHealth Increase 10%": {
+            "defaultStackType": {
+                "refreshStack": false
+            },
+            "modifiers": {
+                "maxHealthModifier": {
+                    "additiveFactor": 0.1
+                },
+                "weaponDamageModifier": {
+                    "additiveFactor": 0.1
+                }
+            }
+        }
+    }
+}

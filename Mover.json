@@ -1,0 +1,16 @@
+{
+    "movers": {
+        "Delayed Blast Fireball Missile": {
+            "ballistic": {
+                "flightTime": 2,
+                "gravity": 5
+            }
+        },
+        "Hero IceMage Weapon Missile": {
+            "ballistic": {
+                "flightTime": 0.5,
+                "gravity": 12
+            }
+        }
+    }
+}

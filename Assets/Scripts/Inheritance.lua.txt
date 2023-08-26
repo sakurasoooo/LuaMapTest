@@ -1,0 +1,129 @@
+-- score base class
+   local ScoreCounter = {}
+-- ScoreCounter Constructor
+    function ScoreCounter:new(o)
+        o = o or {}
+        setmetatable(o, self)
+        self.__index = self
+        self.Score = 0
+        return o
+    end
+
+-- ScoreCounter Methods
+    function ScoreCounter:IncrementScore()
+        self.Score = self.Score + 1
+    end
+
+    function ScoreCounter:DecrementScore()
+        self.Score = self.Score - 1
+    end
+
+    function ScoreCounter:ResetScore()
+        self.Score = 0
+    end
+
+    function ScoreCounter:GetScore()
+        return self.Score
+    end
+
+    function ScoreCounter:DeepCopy()
+        local copy = ScoreCounter:new()
+        copy.Score = self.Score
+        return copy
+    end
+
+-- GameUnit base Class
+    local GameUnit = {}
+
+-- GameUnit Constructor
+    function GameUnit:new(o)
+        o = o or {}
+        setmetatable(o, self)
+        self.__index = self
+        self.ScoreCounter = ScoreCounter:new()
+        return o
+    end
+
+-- GameUnit Methods
+    function GameUnit:IncrementScore()
+        self.ScoreCounter:IncrementScore()
+    end
+
+    function GameUnit:DecrementScore()
+        self.ScoreCounter:DecrementScore()
+    end
+
+    function GameUnit:ResetScore()
+        self.ScoreCounter:ResetScore()
+    end
+
+    function GameUnit:GetScore()
+        return self.ScoreCounter:GetScore()
+    end
+
+-- Hero Class Inheritance from GameUnit
+    local Hero = GameUnit:new()
+-- Hero Constructor
+    function Hero:new(o, name, weopon_list)
+        o = o or GameUnit:new()
+        setmetatable(o, self)
+        self.__index = self
+        self.Name = name or "Hero"
+        self.WeoponList = weopon_list or {
+            {Name = "Sword", Damage = 10},
+            {Name = "Bow", Damage = 5},
+            {Name = "Axe", Damage = 15},
+        }
+        return o
+    end
+
+-- Hero Methods
+    function Hero:DeepCopy()
+        local copy = Hero:new()
+        copy.ScoreCounter = self.ScoreCounter:DeepCopy()
+        copy.Name = self.Name
+        copy.WeoponList = {}
+        for i, v in ipairs(self.WeoponList) do
+            copy.WeoponList[i] = {Name = v.Name, Damage = v.Damage}
+        end
+        return copy
+    end
+
+    function Hero:ShallowCopy()
+        local copy = Hero:new()
+        copy.ScoreCounter = self.ScoreCounter
+        copy.Name = self.Name
+        copy.WeoponList = self.WeoponList
+        return copy
+    end
+
+    function Hero:Print()
+        DCEI.LogMessage("Hero Name: " .. self.Name)
+        DCEI.LogMessage("Hero Score: " .. self:GetScore())
+        -- DCEI.LogMessage("Hero Weopon List: ")
+        -- for _, v in ipairs(self.WeoponList) do
+        --     DCEI.LogMessage("Weopon Name: " .. v.Name)
+        --     DCEI.LogMessage("Weopon Damage: " .. v.Damage)
+        -- end
+    end
+
+    local function CopyTestCases()
+    -- Shallow Copy Test
+    DCEI.LogMessage("Shallow Copy Test")
+    local hero = Hero:new()
+    local hero_copy = hero:ShallowCopy()
+    hero_copy:IncrementScore()
+    hero:Print()
+    hero_copy:Print()
+    -- Deep Copy Test
+    DCEI.LogMessage("Deep Copy Test")
+    local heroB = Hero:new()
+    local heroB_copy = heroB:DeepCopy()
+    heroB_copy:IncrementScore()
+    heroB:Print()
+    heroB_copy:Print()
+    end
+-- Test
+CopyTestCases()
+
+return Hero

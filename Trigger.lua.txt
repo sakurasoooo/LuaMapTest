@@ -1,0 +1,124 @@
+
+-- LIBRARIES
+local core = require("core")
+local test = require("Inheritance")
+
+-- CONSTANTS
+local ENEMY_TEAM = -1
+
+-- VARIABLES
+local score = 0
+local enemy_unit_name = DCEI.Unit("Hero IceMage")
+local hero_unit_name = DCEI.Unit("Hero FireMage")
+local parent = DCEI.CreateFrameFromXml(DCEI.GetUiRootFrame(), "Root")
+local upgrade_button = DCEI.GetChildFrameById(parent, "upgrade_button")
+
+-- GLOBALS
+local GLOBAL = {
+    round = 0,
+    score = 0,
+    are_enemies_spawning = false,
+    -- hero = DCEI.FindUnit("Hero"),
+    game_instance = 1,
+}
+
+local enemy_points = {
+    {20,14},
+    {20,16},
+    {20,18}
+}
+
+-- TRIGGERS
+function OnMapStart()
+    core.HideDefaultUi()
+    ShowGlobalVariable()
+
+    DCEI.CreateUnit(1,1,hero_unit_name,16,16)
+    for _, point in ipairs(enemy_points) do
+        SpawnEnemyUnitAtPoint(point)
+    end
+end
+
+function SpawnEnemyUnitAtPoint(point)
+    DCEI.CreateUnit(-1, -1, enemy_unit_name, point[1], point[2])
+    
+end
+
+function OnUnitDied()
+    
+
+    local u = DCEI.TriggeringUnit
+    local name = DCEI.GetUnitType(u)
+    local p = DCEI.GetUnitPosition2D(u)
+    local point = {p.x, p.y}
+
+    if name == enemy_unit_name then 
+        DCEI.LogMessage("> an enemy unit died")
+        score = score + 1
+        UpdateScore()
+
+        DCEI.TriggerAddTimerEventElapsed(
+            function ()
+                SpawnEnemyUnitAtPoint(point)
+            end,
+            2
+        )
+    end
+end
+
+function UpdateScore()
+    DCEI.ShowObjectiveText("Score: ".. score)
+    
+end
+
+function OnKeyDown()
+    local hero = DCEI.FindUnit(hero_unit_name)
+    local mouse_position = DCEI.GetMouseWorldPosition2D()
+
+    DCEI.CastAbilityAtPosition("Delayed Blast Fireball", hero, mouse_position.x, mouse_position.y)
+    
+end
+
+
+function UpgradeAllEnemies()
+    local enemy_unit_list = DCEI.FindUnitsByTeamId(ENEMY_TEAM)
+
+    -- ipairs implementations
+    for _, unit in ipairs(enemy_unit_list) do
+        UpgradeUnit(unit)
+    end
+end
+
+function ShowGlobalVariable()
+    -- pairs implementations
+    for key, value in pairs(GLOBAL) do
+        DCEI.LogMessage(tostring(key)..": "..tostring(value))
+    end
+    
+end
+
+function UpgradeUnit(unit)
+    local upgrade_behavior = DCEI.Behavior("Damage and MaxHealth Increase 10%")
+    DCEI.ApplyBehaviorToSelf(unit, upgrade_behavior, 1)
+    
+end
+
+-- INITIALIZE
+DCEI.TriggerAddTimerEventElapsed(OnMapStart, 0)
+DCEI.TriggerAddUnitDiedEvent(DCEI.UnitAny, OnUnitDied)
+DCEI.TriggerAddMappedKeyDownEvent("Special", OnKeyDown)
+
+
+DCEI.SetOnClickCallback(
+    upgrade_button, 
+    function()    
+        DCEI.LogMessage("Button is clicked")
+        UpgradeAllEnemies()
+    end
+)
+
+
+--[[
+    Block comment text that
+    can span multiple lines
+]]

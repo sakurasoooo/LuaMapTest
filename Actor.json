@@ -1,0 +1,564 @@
+{
+    "actors": {
+        "Damage and MaxHealth Increase 10% Model": {
+            "modelActor": {
+                "resource": {
+                    "type": "None",
+                    "name": ""
+                },
+                "events": [
+                    {
+                        "actorTerm": {
+                            "behaviorOn": {
+                                "behavior": "Damage and MaxHealth Increase 10%"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "create": {}
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "behaviorOff": {
+                                "behavior": "Damage and MaxHealth Increase 10%"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "destroy": {}
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "behaviorStackIncrease": {
+                                "behavior": "Damage and MaxHealth Increase 10%"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "create": {
+                                    "actor": "Unit Upgrade VFX"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "Delayed Blast Fireball Action": {
+            "actionActor": {
+                "effect": "Delayed Blast Firebal Search",
+                "impactModel": "Delayed Blast Fireball VFX"
+            }
+        },
+        "Delayed Blast Fireball Lauch SFX": {
+            "parent": "_SFX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "Sound",
+                    "name": "breathoffire_spell_cast"
+                }
+            }
+        },
+        "Delayed Blast Fireball Missile": {
+            "prefix": "",
+            "unitActor": {
+                "resource": {
+                    "type": "ParticleAnimation",
+                    "name": "vfx_loashrine_offeringstotheloa_missile_slim"
+                },
+                "events": [
+                    {
+                        "actorTerm": {
+                            "actorCreate": {}
+                        },
+                        "actions": [
+                            {
+                                "create": {
+                                    "actor": "Delayed Blast Fireball Lauch SFX"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "Delayed Blast Fireball Persistent SFX": {
+            "parent": "_SFX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "Sound",
+                    "name": "flamethrower_riveroffire_loop"
+                }
+            }
+        },
+        "Delayed Blast Fireball Persistent VFX": {
+            "parent": "_FX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "ParticleAnimation",
+                    "name": "vfx_flamethrower_river_of_fire_burning_radius"
+                },
+                "events": [
+                    {
+                        "actorTerm": {
+                            "persistentEffectOn": {
+                                "effect": "Delayed Blast Fireball Delay"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "create": {
+                                    "detached": false
+                                }
+                            },
+                            {
+                                "create": {
+                                    "actor": "Delayed Blast Fireball Persistent SFX"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "persistentEffectOff": {}
+                        },
+                        "actions": [
+                            {
+                                "destroy": {}
+                            },
+                            {
+                                "destroy": {
+                                    "actor": "Delayed Blast Fireball Persistent SFX"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "hostSite": "",
+                "modelScale": 3,
+                "selectionScale": {
+                    "z": 1
+                },
+                "scaleMultiplier": {
+                    "z": 1
+                }
+            }
+        },
+        "Delayed Blast Fireball SFX": {
+            "parent": "_SFX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "Sound",
+                    "name": "cannon_fire_nova"
+                }
+            }
+        },
+        "Delayed Blast Fireball VFX": {
+            "parent": "_FX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "ParticleAnimation",
+                    "name": "vfx_lavaooze_death_explode_slim"
+                },
+                "events": [
+                    {
+                        "actorTerm": {
+                            "actorCreate": {}
+                        },
+                        "actions": [
+                            {
+                                "create": {
+                                    "actor": "Delayed Blast Fireball SFX"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "modelScale": 2
+            }
+        },
+        "Hero FireMage": {
+            "prefix": "",
+            "unitActor": {
+                "resource": {
+                    "type": "GpuAnimation",
+                    "name": "fantasy_hero_flamemage_druid"
+                },
+                "events": [
+                    {
+                        "actorTerm": {
+                            "unitDeath": {}
+                        },
+                        "actions": [
+                            {
+                                "playAnimation": {
+                                    "clipId": 1
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "unitDeath": {}
+                        },
+                        "actions": [
+                            {
+                                "create": {
+                                    "actor": "Hero FireMage Death SFX"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "unitAbilityStart": {
+                                "ability": "Delayed Blast Fireball"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "playAnimation": {
+                                    "clipId": 4
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "unitAbilityStop": {
+                                "ability": "Delayed Blast Fireball"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "stopAnimation": {
+                                    "clipId": 4
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "eventMacros": [
+                    "Events StandardUnit Selectable"
+                ],
+                "hostSites": {
+                    "SiteHit": {}
+                },
+                "walkAnimationSpeed": 1.75
+            }
+        },
+        "Hero FireMage Death SFX": {
+            "modelActor": {
+                "resource": {
+                    "type": "Sound",
+                    "name": "beetlewarrior_death_02"
+                },
+                "events": [
+                    {
+                        "actorTerm": {
+                            "actorCreate": {}
+                        },
+                        "actions": [
+                            {
+                                "playAnimation": {}
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "animationFinish": {}
+                        },
+                        "actions": [
+                            {
+                                "destroy": {}
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "Hero IceMage": {
+            "prefix": "",
+            "parent": "_StandardUnit DecayOnDeath",
+            "unitActor": {
+                "resource": {
+                    "type": "GpuAnimation",
+                    "name": "merman_mage"
+                },
+                "events": [
+                    {
+                        "actorTerm": {
+                            "unitDeath": {}
+                        },
+                        "actions": [
+                            {
+                                "create": {
+                                    "actor": "Hero IceMage Death SFX"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "unitDeath": {}
+                        },
+                        "actions": [
+                            {
+                                "playAnimation": {
+                                    "clipId": 1
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "unitAbilityStart": {
+                                "ability": "Ice Spike"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "playAnimation": {
+                                    "clipId": 17
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "unitAbilityStop": {
+                                "ability": "Ice Spike"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "stopAnimation": {
+                                    "clipId": 17
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "unitWeaponStart": {
+                                "weapon": "Hero IceMage Weapon"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "playAnimation": {
+                                    "clipId": 0
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "unitWeaponStop": {
+                                "weapon": "Hero IceMage Weapon"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "stopAnimation": {
+                                    "clipId": 0
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "eventMacros": [
+                    "Events StandardUnit Selectable"
+                ],
+                "hostSites": {
+                    "SiteWeapon": {
+                        "offset": {
+                            "forward": 0.5,
+                            "up": 0.5
+                        }
+                    }
+                },
+                "walkAnimationSpeed": 1.75
+            }
+        },
+        "Hero IceMage Death SFX": {
+            "modelActor": {
+                "resource": {
+                    "type": "Sound",
+                    "name": "enemy_death_poof_v2"
+                },
+                "events": [
+                    {
+                        "actorTerm": {
+                            "actorCreate": {}
+                        },
+                        "actions": [
+                            {
+                                "playAnimation": {}
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "animationFinish": {}
+                        },
+                        "actions": [
+                            {
+                                "destroy": {}
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "Hero IceMage Weapon Attack FX": {
+            "parent": "_FX Attack SingleTarget",
+            "actionActor": {
+                "effect": "Hero IceMage Weapon Launch",
+                "launchModel": "Hero IceMage Weapon Launch SFX",
+                "impactModel": "Hero IceMage Weapon Impact FX"
+            }
+        },
+        "Hero IceMage Weapon Impact FX": {
+            "parent": "_FX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "ParticleAnimation",
+                    "name": "vfx_icemage_frostbolt_impact"
+                }
+            }
+        },
+        "Hero IceMage Weapon Launch SFX": {
+            "parent": "_SFX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "Sound",
+                    "name": "ice_mage_missile_launch"
+                }
+            }
+        },
+        "Hero IceMage Weapon Missile": {
+            "prefix": "",
+            "unitActor": {
+                "resource": {
+                    "type": "ParticleAnimation",
+                    "name": "vfx_icemage_weapon_missile"
+                }
+            }
+        },
+        "Ice Spike Impact VFX": {
+            "parent": "_FX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "ParticleAnimation",
+                    "name": "vfx_spell_icerupture_chill_aura"
+                },
+                "hostSite": "",
+                "modelScale": 1,
+                "selectionScale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "scaleMultiplier": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                }
+            }
+        },
+        "Ice Spike Persistent VFX": {
+            "parent": "_FX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "ParticleAnimation",
+                    "name": "vfx_generic_region_aura_ice"
+                },
+                "events": [
+                    {
+                        "actorTerm": {
+                            "persistentEffectOn": {
+                                "effect": "Ice Spike Delay"
+                            }
+                        },
+                        "actions": [
+                            {
+                                "create": {}
+                            }
+                        ]
+                    },
+                    {
+                        "actorTerm": {
+                            "persistentEffectOff": {}
+                        },
+                        "actions": [
+                            {
+                                "destroy": {}
+                            }
+                        ]
+                    }
+                ],
+                "modelScale": 1,
+                "selectionScale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "scaleMultiplier": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                }
+            }
+        },
+        "Unit Upgrade SFX": {
+            "parent": "_SFX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "Sound",
+                    "name": "card_level_up"
+                }
+            }
+        },
+        "Unit Upgrade VFX": {
+            "parent": "_FX OneShot SelfRemoving",
+            "modelActor": {
+                "resource": {
+                    "type": "ParticleAnimation",
+                    "name": "vfx_hero_upgraded_buff"
+                },
+                "events": [
+                    {
+                        "actorTerm": {
+                            "actorCreate": {}
+                        },
+                        "actions": [
+                            {
+                                "create": {
+                                    "actor": "Unit Upgrade SFX"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "_CBuilding": {
+            "unitActor": {
+                "resource": {
+                    "type": "GpuAnimation"
+                }
+            }
+        },
+        "ice Spike Action": {
+            "actionActor": {
+                "effect": "Ice Spike Search",
+                "impactModel": "Ice Spike Impact VFX"
+            }
+        }
+    }
+}
