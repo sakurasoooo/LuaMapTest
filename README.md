@@ -1,2 +1,2 @@
 # LuaMapTest
- An Lua exam for Dream Map Editor
+ A Lua exam for Dream Map Editor
